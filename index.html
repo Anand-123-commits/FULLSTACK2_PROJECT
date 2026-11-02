@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Parking Dashboard</title>
+  <meta name="description" content="Manage parking spaces dynamically with our futuristic web dashboard.">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <header class="glass-header">
+      <h1>Smart <span>Parking</span></h1>
+      <p>Real-time space management system</p>
+    </header>
+
+    <main class="dashboard">
+      <section class="panel slots-panel">
+        <h2>Parking Slots</h2>
+        <div class="slots-grid" id="slotsGrid">
+          <div class="loader">Loading slots...</div>
+        </div>
+      </section>
+
+      <div class="side-panels">
+        <section class="panel control-panel">
+          <h2>Vehicle Entry</h2>
+          <form id="entryForm">
+            <div class="form-group">
+              <label for="ownerName">Owner Name</label>
+              <input type="text" id="ownerName" required placeholder="e.g. Rahul" autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label for="vehicleType">Vehicle Type</label>
+              <select id="vehicleType" required>
+                <option value="Car">Car</option>
+                <option value="Bike">Bike</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="slotSelect">Assign Slot</label>
+              <select id="slotSelect" required>
+                <!-- Available slots injected here -->
+              </select>
+            </div>
+            <button type="submit" class="btn primary-btn">Register & Park</button>
+          </form>
+        </section>
+
+        <section class="panel active-panel">
+          <h2>Currently Parked</h2>
+          <div class="active-list" id="activeList">
+            <!-- Active parked vehicles injected here -->
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

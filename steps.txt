@@ -1,0 +1,61 @@
+# How to Run the Smart Parking App From Scratch
+
+Follow these steps to set up and run the Smart Parking web application on a new laptop.
+
+## Technology Stack Used
+
+### Frontend
+- **HTML5:** Used for the structure of the dashboard and forms without a heavy framework.
+- **CSS3:** Implements a custom light mode, glassmorphic UI, responsive layouts, and animations directly.
+- **JavaScript:** Uses the native `Fetch API` to asynchronously pull and send data to our Node server, handling DOM updates natively.
+
+### Backend
+- **Node.js**: The Javascript runtime engine that powers the main application logic.
+- **Express.js**: A lightweight and robust minimal web framework used to set up the REST API routing (e.g. GET `/api/slots`, POST `/api/vehicles`). It also securely serves our static frontend assets cleanly.
+
+### Database (MySQL)
+We use a relational database **MySQL** natively linked via the `mysql2` Node driver to manage relations:
+- Uses a `Vehicle` table to store IDs, generic owner names, and car models.
+- Uses a `ParkingSlot` table to map exactly 10 initial specific physical spots and their respective live `Status` ('Available' or 'Occupied').
+- Uses a mapping `ParkingRecord` table matching `VehicleID` & `SlotID` with Entry and Exit `DATETIME` intervals. This keeps strict ACID constraints to ensure slots are never double-booked and accurate payment duration can be inferred later.
+
+---
+
+## Step 1: Install Prerequisites
+1. Download and install **Node.js**: https://nodejs.org/ (This will also install `npm`).
+2. Download and install **MySQL Server**: https://dev.mysql.com/downloads/installer/ (Ensure it is running and note your root password).
+
+## Step 2: Configure Environment Variables
+1. Open the `.env` file in the project folder (`smart-parking/.env`).
+2. Update the `DB_PASSWORD` exactly to what you set as your MySQL root password.
+   For example: `DB_PASSWORD=YourSecurePassword123`
+3. Optional: if your user is not `root`, modify `DB_USER` as well.
+
+## Step 3: Initialize the Database
+Since the backend uses a MySQL database (`SmartParking1`), you need to initialize it.
+1. Open a terminal or command prompt inside the `smart-parking` folder.
+2. Run the initialization script to set up the schemas, slots, and testing records:
+   ```bash
+   node setup.js
+   ```
+*(You will see a success message once the database is fully set up).*
+
+## Step 4: Install Dependencies
+1. Open your terminal in the `smart-parking` project folder.
+2. Install the necessary Node.js libraries by running:
+   ```bash
+   npm install
+   ```
+*(This installs Express, mysql2, cors, and dotenv).*
+
+## Step 5: Start the Application Server
+1. In the same terminal, start the server by running:
+   ```bash
+   npm start
+   ```
+2. You should see: `"Smart Parking Server running on port 3000"`.
+
+## Step 6: Access the Frontend Dashboard
+1. Open any modern web browser (Chrome, Edge, Firefox, etc.).
+2. Go to: **http://localhost:3000**
+3. Your Smart Parking frontend will load dynamically pulling the initialized data from your new database!
